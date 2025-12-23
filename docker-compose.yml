@@ -13,8 +13,6 @@ services:
       dockerfile: Dockerfile
       args:
         APP_DIR: apex
-    env_file:
-      - .env
     environment:
       STARTUP_DELAY: "0"
       DISCORD_BOT_TOKEN: ${DISCORD_BOT_TOKEN_MAP}
@@ -28,8 +26,6 @@ services:
       dockerfile: Dockerfile
       args:
         APP_DIR: apex_daan
-    env_file:
-      - .env
     environment:
       STARTUP_DELAY: "10"
       DISCORD_BOT_TOKEN: ${DISCORD_BOT_TOKEN_DAAN}
@@ -44,8 +40,6 @@ services:
       dockerfile: Dockerfile
       args:
         APP_DIR: apex_eben
-    env_file:
-      - .env
     environment:
       STARTUP_DELAY: "20"
       DISCORD_BOT_TOKEN: ${DISCORD_BOT_TOKEN_EBEN}
@@ -60,8 +54,6 @@ services:
       dockerfile: Dockerfile
       args:
         APP_DIR: apex_nino
-    env_file:
-      - .env
     environment:
       STARTUP_DELAY: "30"
       DISCORD_BOT_TOKEN: ${DISCORD_BOT_TOKEN_NINO}
