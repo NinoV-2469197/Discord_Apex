@@ -1,0 +1,58 @@
+version: "3.9"
+
+x-bot-base: &bot-base
+  init: true
+  restart: unless-stopped
+
+services:
+  apex_map_bot:
+    <<: *bot-base
+    container_name: apex-map-bot
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_DIR: apex
+    env_file:
+      - apex/.env
+    environment:
+      STARTUP_DELAY: "0"
+
+  apex_daan_bot:
+    <<: *bot-base
+    container_name: apex-daan-bot
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_DIR: apex_daan
+    env_file:
+      - apex_daan/.env
+    environment:
+      STARTUP_DELAY: "10"
+
+  apex_eben_bot:
+    <<: *bot-base
+    container_name: apex-eben-bot
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_DIR: apex_eben
+    env_file:
+      - apex_eben/.env
+    environment:
+      STARTUP_DELAY: "20"
+
+  apex_nino_bot:
+    <<: *bot-base
+    container_name: apex-nino-bot
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        APP_DIR: apex_nino
+    env_file:
+      - apex_nino/.env
+    environment:
+      STARTUP_DELAY: "30"
