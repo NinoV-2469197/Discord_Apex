@@ -1,6 +1,7 @@
 import discord
 from discord.ext import tasks
 import aiohttp
+import asyncio
 import logging
 import os
 import sys
@@ -142,6 +143,12 @@ class ApexPlayerBot(discord.Client):
     @update_stats_task.before_loop
     async def before_update_stats_task(self):
         await self.wait_until_ready()
+        # Add startup delay to stagger API calls and avoid rate limits
+        # depends_on ensures containers start in order, this adds a small buffer
+        startup_delay = int(os.getenv('STARTUP_DELAY', '0'))
+        if startup_delay > 0:
+            logging.info(f"Waiting {startup_delay} seconds before first API call to avoid rate limits...")
+            await asyncio.sleep(startup_delay)
 
 if __name__ == '__main__':
     bot = ApexPlayerBot()
