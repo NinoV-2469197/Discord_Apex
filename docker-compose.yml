@@ -17,50 +17,25 @@ services:
       - DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN_MAP}
       - APEX_API_KEY=${APEX_API_KEY}
 
-  apex_player_daan:
+  apex_players:
     <<: *bot-base
-    container_name: apex-player-daan
+    container_name: apex-players
     build:
       context: .
       dockerfile: Dockerfile
       args:
         APP_DIR: apex_player
     environment:
-      - DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN_DAAN}
       - APEX_API_KEY=${APEX_API_KEY}
-      - PLAYER_UID=${PLAYER_UID_DAAN}
-      - STARTUP_DELAY=3
+      # Player configurations
+      - DISCORD_BOT_TOKEN_DAAN=${DISCORD_BOT_TOKEN_DAAN}
+      - PLAYER_UID_DAAN=${PLAYER_UID_DAAN}
+      - STARTUP_DELAY_DAAN=3
+      - DISCORD_BOT_TOKEN_EBEN=${DISCORD_BOT_TOKEN_EBEN}
+      - PLAYER_UID_EBEN=${PLAYER_UID_EBEN}
+      - STARTUP_DELAY_EBEN=6
+      - DISCORD_BOT_TOKEN_NINO=${DISCORD_BOT_TOKEN_NINO}
+      - PLAYER_UID_NINO=${PLAYER_UID_NINO}
+      - STARTUP_DELAY_NINO=9
     depends_on:
       - apex_map_bot
-
-  apex_player_eben:
-    <<: *bot-base
-    container_name: apex-player-eben
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        APP_DIR: apex_player
-    environment:
-      - DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN_EBEN}
-      - APEX_API_KEY=${APEX_API_KEY}
-      - PLAYER_UID=${PLAYER_UID_EBEN}
-      - STARTUP_DELAY=6
-    depends_on:
-      - apex_player_daan
-
-  apex_player_nino:
-    <<: *bot-base
-    container_name: apex-player-nino
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        APP_DIR: apex_player
-    environment:
-      - DISCORD_BOT_TOKEN=${DISCORD_BOT_TOKEN_NINO}
-      - APEX_API_KEY=${APEX_API_KEY}
-      - PLAYER_UID=${PLAYER_UID_NINO}
-      - STARTUP_DELAY=9
-    depends_on:
-      - apex_player_eben
